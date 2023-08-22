@@ -1,0 +1,21 @@
+version: '3'
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - /var/lib/mongodb_data:/data/
+  my-graphql-app:
+    build: .
+    command: npm start
+    ports:
+      - "8000:8000"  
+    environment:
+      - NODE_ENV=production
+      - PORT=8000
+      - MONGODB_URI=mongodb://mongo:27017/my-app
+      - GRAPHQL_ENDPOINT=/graphql
+      - JWT_SECRET=secret
+    depends_on:
+      - mongo

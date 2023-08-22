@@ -1,0 +1,28 @@
+type User {
+  _id: ID!
+  name: String!
+  email: EmailAddress!
+  age: Int
+  todos: [Todo!]
+}
+
+type Token {
+  token: String!
+}
+
+type Mutation {
+  register(input: RegisterInput!): User
+  login(input: LoginInput!): Token
+}
+
+input RegisterInput {
+  name: String!
+  email: EmailAddress!
+  age: Int
+  password: String!
+}
+
+input LoginInput {
+  email: EmailAddress!
+  password: String!
+}
